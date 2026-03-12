@@ -1,3 +1,5 @@
+import {Helmet} from 'react-helmet-async';
+import {PageTitle} from '../../const';
 import OfferItem from '../../components/offer-item/offer-item';
 
 type MainPageProps = {
@@ -7,6 +9,9 @@ type MainPageProps = {
 function MainPage({offersCount}: MainPageProps): JSX.Element {
   return (
     <div className='page page--gray page--main'>
+      <Helmet>
+        <title>{PageTitle.Main}</title>
+      </Helmet>
       <header className='header'>
         <div className='container'>
           <div className='header__wrapper'>
