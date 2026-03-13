@@ -1,12 +1,13 @@
 import {Helmet} from 'react-helmet-async';
 import {PageTitle} from '../../const';
-import OfferItem from '../../components/offer-item/offer-item';
+import OffersList from '../../components/offers-list/offers-list';
+import {Offer} from '../../mocks/offers';
 
 type MainPageProps = {
-  offersCount: number;
+  offers: Offer[];
 }
 
-function MainPage({offersCount}: MainPageProps): JSX.Element {
+function MainPage({offers}: MainPageProps): JSX.Element {
   return (
     <div className='page page--gray page--main'>
       <Helmet>
@@ -92,7 +93,7 @@ function MainPage({offersCount}: MainPageProps): JSX.Element {
           <div className='cities__places-container container'>
             <section className='cities__places places'>
               <h2 className='visually-hidden'>Places</h2>
-              <b className='places__found'>{offersCount} places to stay in Amsterdam</b>
+              <b className='places__found'>{offers.length} places to stay in Amsterdam</b>
               <form className='places__sorting' action='#' method='get'>
                 <span className='places__sorting-caption'>Sort by</span>
                 <span className='places__sorting-type' tabIndex={0}>
@@ -120,11 +121,7 @@ function MainPage({offersCount}: MainPageProps): JSX.Element {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <OfferItem />
-                <OfferItem />
-                <OfferItem />
-                <OfferItem />
-                <OfferItem />
+                <OffersList offers={offers}/>
               </div>
             </section>
             <div className='cities__right-section'>
