@@ -6,8 +6,11 @@ export type Offer = {
   rating: number;
   isPremium: boolean;
   previewImage: string;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
 };
-
 export const offers: Offer[] = [
   {
     id: '1',
@@ -16,7 +19,11 @@ export const offers: Offer[] = [
     price: 120,
     rating: 4,
     isPremium: true,
-    previewImage: 'img/apartment-01.jpg'
+    previewImage: 'img/apartment-01.jpg',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: '2',
@@ -25,7 +32,11 @@ export const offers: Offer[] = [
     price: 80,
     rating: 4,
     isPremium: false,
-    previewImage: 'img/room.jpg'
+    previewImage: 'img/room.jpg',
+    location: {
+      latitude: 52.3609553943508,
+      longitude: 4.85309666406198
+    }
   },
   {
     id: '3',
@@ -34,7 +45,11 @@ export const offers: Offer[] = [
     price: 132,
     rating: 4,
     isPremium: false,
-    previewImage: 'img/apartment-02.jpg'
+    previewImage: 'img/apartment-02.jpg',
+    location: {
+      latitude: 52.3909553943508,
+      longitude: 4.929309666406198
+    }
   },
   {
     id: '4',
@@ -43,6 +58,10 @@ export const offers: Offer[] = [
     price: 180,
     rating: 5,
     isPremium: true,
-    previewImage: 'img/apartment-03.jpg'
+    previewImage: 'img/apartment-03.jpg',
+    location: {
+      latitude: 52.3809553943508,
+      longitude: 4.939309666406198
+    }
   }
 ];

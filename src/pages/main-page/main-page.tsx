@@ -2,6 +2,7 @@ import {Helmet} from 'react-helmet-async';
 import {PageTitle} from '../../const';
 import OffersList from '../../components/offers-list/offers-list';
 import {Offer} from '../../mocks/offers';
+import Map from '../../components/map/map';
 
 type MainPageProps = {
   offers: Offer[];
@@ -125,7 +126,9 @@ function MainPage({offers}: MainPageProps): JSX.Element {
               </div>
             </section>
             <div className='cities__right-section'>
-              <section className='cities__map map' />
+              <section className='cities__map map'>
+                <Map offers={offers} />
+              </section>
             </div>
           </div>
         </div>
