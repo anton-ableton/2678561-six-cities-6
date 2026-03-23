@@ -7,7 +7,7 @@ import FavoritesPage from '../../pages/favorites-page/favorites-page';
 import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundScreen from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 
 type AppScreenProps = {
   offers: Offer[];
@@ -38,7 +38,7 @@ function App({offers}: AppScreenProps): JSX.Element {
           />
           <Route
             path={AppRoute.Offer}
-            element={<OfferPage />}
+            element={<OfferPage offers={offers} />}
           />
           <Route
             path={AppRoute.NotFound}
