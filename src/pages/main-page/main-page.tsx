@@ -1,7 +1,7 @@
 import {Helmet} from 'react-helmet-async';
 import {PageTitle} from '../../const';
 import OffersList from '../../components/offers-list/offers-list';
-import {Offer} from '../../mocks/offers';
+import {Offer} from '../../types/offer';
 import Map from '../../components/map/map';
 
 type MainPageProps = {

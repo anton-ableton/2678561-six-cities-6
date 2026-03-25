@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import L from 'leaflet';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
@@ -21,6 +21,7 @@ const customIcon = L.icon({
 function Map({ offers }: MapProps): JSX.Element {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<L.Map | null>(null);
+  const markersLayer = useRef<L.LayerGroup | null>(null);
 
   useEffect(() => {
     if (mapRef.current !== null && mapInstance.current === null) {
@@ -35,16 +36,25 @@ function Map({ offers }: MapProps): JSX.Element {
           attribution: '&copy; OpenStreetMap contributors'
         }
       ).addTo(mapInstance.current);
+
+      markersLayer.current = L.layerGroup().addTo(mapInstance.current);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!mapInstance.current || !markersLayer.current) {
+      return;
     }
 
-    if (mapInstance.current) {
-      offers.forEach((offer) => {
-        const { latitude, longitude } = offer.location;
+    markersLayer.current.clearLayers();
 
-        L.marker([latitude, longitude], { icon: customIcon })
-          .addTo(mapInstance.current!);
-      });
-    }
+    offers.forEach((offer) => {
+      const { latitude, longitude } = offer.location;
+
+      L.marker([latitude, longitude], { icon: customIcon })
+        .addTo(markersLayer.current!);
+    });
+
   }, [offers]);
 
   return (

@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet-async';
 import { PageTitle } from '../../const';
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 
 type FavoritesPageProps = {
   offers: Offer[];

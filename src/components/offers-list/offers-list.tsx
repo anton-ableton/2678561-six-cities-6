@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import OfferItem from '../offer-item/offer-item';
-import { Offer } from '../../mocks/offers';
+import { Offer } from '../../types/offer';
 
 type OffersListProps = {
   offers: Offer[];
