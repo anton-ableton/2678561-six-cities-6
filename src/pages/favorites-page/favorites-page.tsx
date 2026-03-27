@@ -1,14 +1,18 @@
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { PageTitle } from '../../const';
 import Logo from '../../components/logo/logo';
 import OffersList from '../../components/offers-list/offers-list';
 import { Offer } from '../../types/offer';
 
-type FavoritesPageProps = {
+type State = {
+  city: string;
   offers: Offer[];
-}
+};
 
-function FavoritesPage({offers}: FavoritesPageProps): JSX.Element {
+function FavoritesPage(): JSX.Element {
+  const offers = useSelector((state: State) => state.offers);
+
   return (
     <div className="page">
       <Helmet>

@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
 import { PageTitle } from '../../const';
 import Logo from '../../components/logo/logo';
@@ -10,14 +11,16 @@ import Map from '../../components/map/map';
 import { Offer } from '../../types/offer';
 import { reviews } from '../../mocks/reviews';
 
-type OfferPageProps = {
+type State = {
+  city: string;
   offers: Offer[];
 };
 
-function OfferPage({ offers }: OfferPageProps): JSX.Element {
+function OfferPage(): JSX.Element {
   const { id } = useParams();
 
-  const currentOffer = offers.find((offer) => offer.id === id);
+  const offers = useSelector((state: State) => state.offers);
+  const currentOffer = offers.find((offer: Offer) => offer.id === id);
 
   if (!currentOffer) {
     return <NotFoundScreen />;
