@@ -5,6 +5,7 @@ import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   offers: Offer[];
+  activeOfferId: string | null;
 };
 
 const AMSTERDAM = {
@@ -18,7 +19,12 @@ const customIcon = L.icon({
   iconSize: [27, 39]
 });
 
-function Map({ offers }: MapProps): JSX.Element {
+const activeIcon = L.icon({
+  iconUrl: '/img/pin-active.svg',
+  iconSize: [27, 39]
+});
+
+function Map({ offers, activeOfferId }: MapProps): JSX.Element {
   const mapRef = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<L.Map | null>(null);
   const markersLayer = useRef<L.LayerGroup | null>(null);
@@ -55,11 +61,13 @@ function Map({ offers }: MapProps): JSX.Element {
     offers.forEach((offer) => {
       const { latitude, longitude } = offer.location;
 
-      L.marker([latitude, longitude], { icon: customIcon })
+      const icon = offer.id === activeOfferId ? activeIcon : customIcon;
+
+      L.marker([latitude, longitude], { icon: icon })
         .addTo(markersLayer.current!);
     });
 
-  }, [offers]);
+  }, [offers, activeOfferId]);
 
   return (
     <div
