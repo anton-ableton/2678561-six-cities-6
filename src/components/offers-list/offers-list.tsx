@@ -3,7 +3,7 @@ import { Offer } from '../../types/offer';
 
 type OffersListProps = {
   offers: Offer[];
-  onHover: (id: string | null) => void;
+  onHover?: (id: string | null) => void;
 };
 
 function OffersList({ offers, onHover }: OffersListProps): JSX.Element {
@@ -13,7 +13,8 @@ function OffersList({ offers, onHover }: OffersListProps): JSX.Element {
         <OfferItem
           key={offer.id}
           offer={offer}
-          onHover={onHover}
+          onMouseEnter={() => onHover?.(offer.id)}
+          onMouseLeave={() => onHover?.(null)}
         />
       ))}
     </>

@@ -5,7 +5,7 @@ import 'leaflet/dist/leaflet.css';
 
 type MapProps = {
   offers: Offer[];
-  activeOfferId: string | null;
+  activeOfferId?: string | null;
 };
 
 const AMSTERDAM = {

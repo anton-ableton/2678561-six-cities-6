@@ -3,17 +3,18 @@ import { Link } from 'react-router-dom';
 
 type OfferItemProps = {
   offer: Offer;
-  onHover: (id: string | null) => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
-function OfferItem({offer, onHover}: OfferItemProps): JSX.Element {
+function OfferItem({offer, onMouseEnter, onMouseLeave}: OfferItemProps): JSX.Element {
   const {id, title, type, price, rating, isPremium, previewImage} = offer;
 
   return (
     <article
       className='cities__card place-card'
-      onMouseEnter={() => onHover(id)}
-      onMouseLeave={() => onHover(null)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
 
       {isPremium && (
