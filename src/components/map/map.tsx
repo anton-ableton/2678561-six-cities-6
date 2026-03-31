@@ -42,9 +42,13 @@ function Map({ offers }: MapProps): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (!mapInstance.current || !markersLayer.current) {
+    if (!mapInstance.current || !markersLayer.current || offers.length === 0) {
       return;
     }
+
+    const { latitude: cityLatitude, longitude: cityLongitude, zoom } = offers[0].city.location;
+
+    mapInstance.current.setView([cityLatitude, cityLongitude], zoom);
 
     markersLayer.current.clearLayers();
 
