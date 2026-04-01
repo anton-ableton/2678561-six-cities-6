@@ -19,3 +19,21 @@ export enum PageTitle {
   Offer = '6 cities. Offer',
   NotFound = '6 cities. Page not found',
 }
+
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price low to high',
+  PriceHighToLow = 'Price high to low',
+  TopRated = 'Top rated',
+}
+
+export const sortTypeLabels: Record<SortType, string> = {
+  [SortType.Popular]: 'Popular',
+  [SortType.PriceLowToHigh]: 'Price: low to high',
+  [SortType.PriceHighToLow]: 'Price: high to low',
+  [SortType.TopRated]: 'Top rated first'
+};
+
+export enum APIRoute {
+  Offers = '/offers',
+}
