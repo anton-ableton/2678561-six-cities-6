@@ -2,7 +2,7 @@ function Spinner(): JSX.Element {
   return (
     <div className='spinner-wrapper'>
       <div className='spinner' />
-      <p>Loading...</p>
+      <p className='spinner-text'>Loading...</p>
     </div>
   );
 }
