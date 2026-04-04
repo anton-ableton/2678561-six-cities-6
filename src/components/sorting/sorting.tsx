@@ -1,18 +1,14 @@
 import { useState } from 'react';
+import { SortType, sortTypeLabels } from '../../const';
 
 type SortingProps = {
-  onChange: (type: string) => void;
+  onChange: (type: SortType) => void;
 };
 
-const options = [
-  'Popular',
-  'Price: low to high',
-  'Price: high to low',
-  'Top rated first'
-];
+const options = Object.values(SortType);
 
 function Sorting({ onChange }: SortingProps): JSX.Element {
-  const [active, setActive] = useState('Popular');
+  const [active, setActive] = useState<SortType>(SortType.Popular);
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -40,17 +36,13 @@ function Sorting({ onChange }: SortingProps): JSX.Element {
         {options.map((option) => (
           <li
             key={option}
-            className={`places__option ${
-              option === active ? 'places__option--active' : ''
-            }`}
-            tabIndex={0}
+            className={`places__option ${option === active ? 'places__option--active' : ''}`}
             onClick={() => {
               setActive(option);
-              setIsOpen(false);
               onChange(option);
             }}
           >
-            {option}
+            {sortTypeLabels[option]}
           </li>
         ))}
       </ul>

@@ -2,14 +2,14 @@ import {Helmet} from 'react-helmet-async';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import { RootState } from '../../store';
-import {PageTitle} from '../../const';
+import {PageTitle, SortType} from '../../const';
 import OffersList from '../../components/offers-list/offers-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import Sorting from '../../components/sorting/sorting';
 
 function MainPage(): JSX.Element {
-  const [sortType, setSortType] = useState('Popular');
+  const [sortType, setSortType] = useState<SortType>(SortType.Popular);
   const { city, offers } = useSelector((state: RootState) => state);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
 
@@ -17,11 +17,11 @@ function MainPage(): JSX.Element {
 
   const sortedOffers = [...filteredOffers].sort((a, b) => {
     switch (sortType) {
-      case 'Price: low to high':
+      case SortType.PriceLowToHigh:
         return a.price - b.price;
-      case 'Price: high to low':
+      case SortType.PriceHighToLow:
         return b.price - a.price;
-      case 'Top rated first':
+      case SortType.TopRated:
         return b.rating - a.rating;
       default:
         return 0;

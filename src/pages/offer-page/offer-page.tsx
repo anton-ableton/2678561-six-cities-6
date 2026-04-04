@@ -5,7 +5,7 @@ import { PageTitle } from '../../const';
 import Logo from '../../components/logo/logo';
 import ReviewForm from '../../components/review-form/review-form';
 import ReviewList from '../../components/review-list/review-list';
-import NotFoundScreen from '../not-found-page/not-found-page';
+import NotFoundPage from '../not-found-page/not-found-page';
 import OffersList from '../../components/offers-list/offers-list';
 import Map from '../../components/map/map';
 import { Offer } from '../../types/offer';
@@ -23,12 +23,10 @@ function OfferPage(): JSX.Element {
   const currentOffer = offers.find((offer: Offer) => offer.id === id);
 
   if (!currentOffer) {
-    return <NotFoundScreen />;
+    return <NotFoundPage />;
   }
 
-  const nearbyOffers = offers
-    .filter((offer) => offer.id !== id)
-    .slice(0, 3);
+  const nearbyOffers = offers.filter((offer) => offer.id !== id).slice(0, 3);
 
   return (
     <div className="page">
