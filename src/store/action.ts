@@ -12,5 +12,4 @@ export type ActionTypeValue = typeof ActionType[keyof typeof ActionType];
 export const setCity = createAction<string>(ActionType.SET_CITY);
 export const setOffers = createAction<Offer[]>(ActionType.SET_OFFERS);
 export const requireAuthorization = createAction<AuthorizationStatus>('REQUIRE_AUTHORIZATION');
-export const login = createAction('LOGIN');
-export const logout = createAction('LOGOUT');
+

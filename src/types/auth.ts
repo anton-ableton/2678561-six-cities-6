@@ -5,4 +5,5 @@ export type AuthData = {
 
 export type AuthResponse = {
   token: string;
+  email: string;
 };

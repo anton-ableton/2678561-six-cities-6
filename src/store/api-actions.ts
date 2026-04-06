@@ -8,35 +8,32 @@ import { AuthData, AuthResponse } from '../types/auth';
 import { APIRoute } from '../const';
 
 export const checkAuth = createAsyncThunk<
-  void,
+  AuthResponse,
   undefined,
   { extra: AxiosInstance }
 >(
   'user/checkAuth',
-  async (_arg, { dispatch, extra: api }) => {
-    try {
-      await api.get('/login');
-      dispatch(requireAuthorization(AuthorizationStatus.Auth));
-    } catch {
-      dispatch(requireAuthorization(AuthorizationStatus.NoAuth));
-    }
+  async (_, { extra: api }) => {
+    const { data } = await api.get<AuthResponse>('/login');
+    return data;
   }
 );
 
 export const login = createAsyncThunk<
-  void,
+  AuthResponse,
   AuthData,
   { extra: AxiosInstance }
 >(
   'user/login',
-  async ({ email, password }, { dispatch, extra: api }) => {
+  async ({ email, password }, { extra: api }) => {
     const { data } = await api.post<AuthResponse>('/login', {
       email,
       password
     });
 
     saveToken(data.token);
-    dispatch(requireAuthorization(AuthorizationStatus.Auth));
+
+    return data;
   }
 );
 

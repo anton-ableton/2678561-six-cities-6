@@ -13,7 +13,7 @@ function MainPage(): JSX.Element {
   const [sortType, setSortType] = useState<SortType>(SortType.Popular);
   const { city, offers } = useSelector((state: RootState) => state);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
-  const { authorizationStatus } = useSelector((state: RootState) => state);
+  const { authorizationStatus, userEmail } = useSelector((state: RootState) => state);
   const dispatch = useDispatch<AppDispatch>();
 
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
@@ -58,7 +58,7 @@ function MainPage(): JSX.Element {
                       <a className='header__nav-link header__nav-link--profile' href='#'>
                         <div className='header__avatar-wrapper user__avatar-wrapper'></div>
                         <span className='header__user-name user__name'>
-                          user@email.com
+                          {userEmail}
                         </span>
                       </a>
                     </li>
