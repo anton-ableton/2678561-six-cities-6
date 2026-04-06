@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Route, BrowserRouter, Routes } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import LoginPage from '../../pages/login-page/login-page';
 import MainPage from '../../pages/main-page/main-page';
 import FavoritesPage from '../../pages/favorites-page/favorites-page';
@@ -10,7 +10,7 @@ import OfferPage from '../../pages/offer-page/offer-page';
 import NotFoundPage from '../../pages/not-found-page/not-found-page';
 import PrivateRoute from '../private-route/private-route';
 import Spinner from '../spinner/spinner';
-import { fetchOffers } from '../../store/api-actions';
+import { fetchOffers, checkAuth } from '../../store/api-actions';
 import { AppDispatch, RootState } from '../../store';
 
 function App(): JSX.Element {
@@ -19,6 +19,7 @@ function App(): JSX.Element {
 
   useEffect(() => {
     dispatch(fetchOffers());
+    dispatch(checkAuth());
   }, [dispatch]);
 
   if (isLoading) {
@@ -34,7 +35,7 @@ function App(): JSX.Element {
           <Route
             path={AppRoute.Favorites}
             element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute>
                 <FavoritesPage />
               </PrivateRoute>
             }

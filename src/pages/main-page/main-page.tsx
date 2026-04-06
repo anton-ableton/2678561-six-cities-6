@@ -1,17 +1,20 @@
 import {Helmet} from 'react-helmet-async';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState } from 'react';
-import { RootState } from '../../store';
-import {PageTitle, SortType} from '../../const';
+import { AppDispatch,RootState } from '../../store';
+import { PageTitle, SortType, AuthorizationStatus, AppRoute } from '../../const';
 import OffersList from '../../components/offers-list/offers-list';
 import CitiesList from '../../components/cities-list/cities-list';
 import Map from '../../components/map/map';
 import Sorting from '../../components/sorting/sorting';
+import { logout } from '../../store/api-actions';
 
 function MainPage(): JSX.Element {
   const [sortType, setSortType] = useState<SortType>(SortType.Popular);
   const { city, offers } = useSelector((state: RootState) => state);
   const [activeOfferId, setActiveOfferId] = useState<string | null>(null);
+  const { authorizationStatus } = useSelector((state: RootState) => state);
+  const dispatch = useDispatch<AppDispatch>();
 
   const filteredOffers = offers.filter((offer) => offer.city.name === city);
 
@@ -49,23 +52,36 @@ function MainPage(): JSX.Element {
             </div>
             <nav className='header__nav'>
               <ul className='header__nav-list'>
-                <li className='header__nav-item user'>
-                  <a
-                    className='header__nav-link header__nav-link--profile'
-                    href='#'
-                  >
-                    <div className='header__avatar-wrapper user__avatar-wrapper'></div>
-                    <span className='header__user-name user__name'>
-                      Oliver.conner@gmail.com
-                    </span>
-                    <span className='header__favorite-count'>3</span>
-                  </a>
-                </li>
-                <li className='header__nav-item'>
-                  <a className='header__nav-link' href='#'>
-                    <span className='header__signout'>Sign out</span>
-                  </a>
-                </li>
+                {authorizationStatus === AuthorizationStatus.Auth ? (
+                  <>
+                    <li className='header__nav-item user'>
+                      <a className='header__nav-link header__nav-link--profile' href='#'>
+                        <div className='header__avatar-wrapper user__avatar-wrapper'></div>
+                        <span className='header__user-name user__name'>
+                          user@email.com
+                        </span>
+                      </a>
+                    </li>
+                    <li className='header__nav-item'>
+                      <a
+                        className='header__nav-link'
+                        href='#'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          dispatch(logout());
+                        }}
+                      >
+                        <span className='header__signout'>Sign out</span>
+                      </a>
+                    </li>
+                  </>
+                ) : (
+                  <li className='header__nav-item'>
+                    <a className='header__nav-link' href={AppRoute.Login}>
+                      <span className='header__login'>Sign in</span>
+                    </a>
+                  </li>
+                )}
               </ul>
             </nav>
           </div>
