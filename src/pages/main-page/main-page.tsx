@@ -78,6 +78,7 @@ function MainPage(): JSX.Element {
                 ) : (
                   <li className='header__nav-item'>
                     <a className='header__nav-link' href={AppRoute.Login}>
+                      <div className='header__avatar-wrapper user__avatar-wrapper'></div>
                       <span className='header__login'>Sign in</span>
                     </a>
                   </li>
