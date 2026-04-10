@@ -42,7 +42,7 @@ function OfferPage(): JSX.Element {
   return (
     <div className="page">
       <Helmet>
-        <title>{PageTitle.Offer + id}</title>
+        <title>{PageTitle.Offer + currentOffer.title}</title>
       </Helmet>
       <Header />
       <main className="page__main page__main--offer">
