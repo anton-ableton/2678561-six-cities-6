@@ -3,11 +3,11 @@ import { Helmet } from 'react-helmet-async';
 import { PageTitle } from '../../const';
 import Header from '../../components/header/header';
 import OffersList from '../../components/offers-list/offers-list';
-import { Offer } from '../../types/offer';
+import { OfferPreview } from '../../types/offer';
 
 type State = {
   city: string;
-  offers: Offer[];
+  offers: OfferPreview[];
 };
 
 function FavoritesPage(): JSX.Element {
